@@ -71,23 +71,38 @@ func main() {
 	//}
 
 	// 题目三：
+	//db, err := sqlx.InitDB()
+	//if err != nil {
+	//	fmt.Println("连接数据库失败:", err)
+	//}
+	//defer sqlx.CloseDb(db)
+	//ctx := context.Background()
+	//department, err := sqlx.GetEmployeesByDepartment(ctx, "技术部", db)
+	//if err != nil {
+	//	fmt.Println("查询失败: ", err)
+	//}
+	//for _, employee := range department {
+	//	fmt.Println("查询到用户: ", employee)
+	//}
+	//
+	//employee, err := sqlx.GetHighestPaidEmployee(ctx, db)
+	//if err != nil {
+	//	fmt.Println("查询失败:", err)
+	//}
+	//fmt.Println("查询到薪资最高的用户:", employee)
+
+	// 题目四：
 	db, err := sqlx.InitDB()
 	if err != nil {
 		fmt.Println("连接数据库失败:", err)
 	}
 	defer sqlx.CloseDb(db)
 	ctx := context.Background()
-	department, err := sqlx.GetEmployeesByDepartment(ctx, "技术部", db)
-	if err != nil {
-		fmt.Println("查询失败: ", err)
-	}
-	for _, employee := range department {
-		fmt.Println("查询到用户: ", employee)
-	}
-
-	employee, err := sqlx.GetHighestPaidEmployee(ctx, db)
+	than, err := sqlx.QueryPricesGreaterThan(ctx, 50, db)
 	if err != nil {
 		fmt.Println("查询失败:", err)
 	}
-	fmt.Println("查询到薪资最高的用户:", employee)
+	for _, book := range than {
+		fmt.Println("查询到书籍: ", book)
+	}
 }
