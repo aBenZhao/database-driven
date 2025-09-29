@@ -2,9 +2,8 @@ package main
 
 import (
 	"context"
-	"database-driven/sql"
-	"log"
-	"time"
+	"database-driven/sqlx"
+	"fmt"
 )
 
 //TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
@@ -12,12 +11,12 @@ import (
 
 func main() {
 	// 初始化数据库连接
-	if err := sql.InitDB(); err != nil {
-		log.Fatalf("数据库初始化失败: %v", err)
-	}
-	defer sql.CloseDb()
-
-	ctx := context.Background()
+	//if err := sql.InitDB(); err != nil {
+	//	log.Fatalf("数据库初始化失败: %v", err)
+	//}
+	//defer sql.CloseDb()
+	//
+	//ctx := context.Background()
 
 	// 题目一：
 	//1. 创建用户
@@ -56,18 +55,39 @@ func main() {
 
 	// 题目二：
 	//转账参数：从账户1向账户2转账100元
-	fromID := 1
-	toID := 2
-	amount := 100.0
+	//fromID := 1
+	//toID := 2
+	//amount := 100.0
+	//
+	//// 创建上下文（可设置超时，例如5秒）
+	//ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	//defer cancel()
+	//
+	//// 实现从账户 A 向账户 B 转账 100 元的操作。
+	//if err := sql.Transfer(ctx, fromID, toID, amount); err != nil {
+	//	log.Printf("转账失败: %v", err)
+	//} else {
+	//	log.Printf("转账成功: 从账户%d向账户%d转账%.2f元", fromID, toID, amount)
+	//}
 
-	// 创建上下文（可设置超时，例如5秒）
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	// 实现从账户 A 向账户 B 转账 100 元的操作。
-	if err := sql.Transfer(ctx, fromID, toID, amount); err != nil {
-		log.Printf("转账失败: %v", err)
-	} else {
-		log.Printf("转账成功: 从账户%d向账户%d转账%.2f元", fromID, toID, amount)
+	// 题目三：
+	db, err := sqlx.InitDB()
+	if err != nil {
+		fmt.Println("连接数据库失败:", err)
 	}
+	defer sqlx.CloseDb(db)
+	ctx := context.Background()
+	department, err := sqlx.GetEmployeesByDepartment(ctx, "技术部", db)
+	if err != nil {
+		fmt.Println("查询失败: ", err)
+	}
+	for _, employee := range department {
+		fmt.Println("查询到用户: ", employee)
+	}
+
+	employee, err := sqlx.GetHighestPaidEmployee(ctx, db)
+	if err != nil {
+		fmt.Println("查询失败:", err)
+	}
+	fmt.Println("查询到薪资最高的用户:", employee)
 }
