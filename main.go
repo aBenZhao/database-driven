@@ -2,6 +2,7 @@ package main
 
 import (
 	"database-driven/gorm"
+	"encoding/json"
 	"fmt"
 )
 
@@ -106,14 +107,45 @@ func main() {
 	//}
 
 	// 题目五：
+	//db, err := gorm.InintGormDb()
+	//if err != nil {
+	//	fmt.Println("连接数据库失败:", err)
+	//}
+	//err = gorm.AutoMerge(db)
+	//if err != nil {
+	//	fmt.Println("自动迁移失败:", err)
+	//}
+	//fmt.Println("自动迁移成功")
+
+	// 题目六（1）：
+	//db, err := gorm.InintGormDb()
+	//if err != nil {
+	//	fmt.Println("连接数据库失败:", err)
+	//}
+	//users, err := gorm.QueryUserPosts(db, 1)
+	//if err != nil {
+	//	fmt.Println("查询失败:", err)
+	//}
+	//// 序列化为JSON
+	//jsonData, err := json.MarshalIndent(users, "", "  ") // 带缩进，便于阅读
+	//if err != nil {
+	//	fmt.Println("序列化失败:", err)
+	//}
+	//fmt.Println("查询结果: ", string(jsonData))
+
+	// 题目六（2）：
 	db, err := gorm.InintGormDb()
 	if err != nil {
 		fmt.Println("连接数据库失败:", err)
 	}
-	err = gorm.AutoMerge(db)
+	comments, err := gorm.GetPostWithMostComments(db)
 	if err != nil {
-		fmt.Println("自动迁移失败:", err)
+		fmt.Println("查询失败:", err)
 	}
-	fmt.Println("自动迁移成功")
+	indent, err := json.MarshalIndent(comments, "", "  ")
+	if err != nil {
+		fmt.Println("序列化失败:", err)
+	}
+	fmt.Println("查询结果: ", string(indent))
 
 }
