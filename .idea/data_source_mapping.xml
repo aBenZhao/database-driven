@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/sqlx/bookPractice.go" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
+    <file url="file://$PROJECT_DIR$/sqlx/employeePractice.go" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_1.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_2.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_3.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_4.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_5.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b839afee-4d31-4672-bee5-af5dd89bafa2/console_6.sql" value="b839afee-4d31-4672-bee5-af5dd89bafa2" />
   </component>
 </project>

@@ -1,8 +1,7 @@
 package main
 
 import (
-	"context"
-	"database-driven/sqlx"
+	"database-driven/gorm"
 	"fmt"
 )
 
@@ -92,17 +91,29 @@ func main() {
 	//fmt.Println("查询到薪资最高的用户:", employee)
 
 	// 题目四：
-	db, err := sqlx.InitDB()
+	//db, err := sqlx.InitDB()
+	//if err != nil {
+	//	fmt.Println("连接数据库失败:", err)
+	//}
+	//defer sqlx.CloseDb(db)
+	//ctx := context.Background()
+	//than, err := sqlx.QueryPricesGreaterThan(ctx, 50, db)
+	//if err != nil {
+	//	fmt.Println("查询失败:", err)
+	//}
+	//for _, book := range than {
+	//	fmt.Println("查询到书籍: ", book)
+	//}
+
+	// 题目五：
+	db, err := gorm.InintGormDb()
 	if err != nil {
 		fmt.Println("连接数据库失败:", err)
 	}
-	defer sqlx.CloseDb(db)
-	ctx := context.Background()
-	than, err := sqlx.QueryPricesGreaterThan(ctx, 50, db)
+	err = gorm.AutoMerge(db)
 	if err != nil {
-		fmt.Println("查询失败:", err)
+		fmt.Println("自动迁移失败:", err)
 	}
-	for _, book := range than {
-		fmt.Println("查询到书籍: ", book)
-	}
+	fmt.Println("自动迁移成功")
+
 }
