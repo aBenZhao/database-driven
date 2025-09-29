@@ -2,7 +2,6 @@ package main
 
 import (
 	"database-driven/gorm"
-	"encoding/json"
 	"fmt"
 )
 
@@ -134,18 +133,30 @@ func main() {
 	//fmt.Println("查询结果: ", string(jsonData))
 
 	// 题目六（2）：
+	//db, err := gorm.InintGormDb()
+	//if err != nil {
+	//	fmt.Println("连接数据库失败:", err)
+	//}
+	//comments, err := gorm.GetPostWithMostComments(db)
+	//if err != nil {
+	//	fmt.Println("查询失败:", err)
+	//}
+	//indent, err := json.MarshalIndent(comments, "", "  ")
+	//if err != nil {
+	//	fmt.Println("序列化失败:", err)
+	//}
+	//fmt.Println("查询结果: ", string(indent))
+
+	// 题目七：
+	// 测试 1：创建文章，验证用户文章数量自动更新
 	db, err := gorm.InintGormDb()
 	if err != nil {
 		fmt.Println("连接数据库失败:", err)
 	}
-	comments, err := gorm.GetPostWithMostComments(db)
-	if err != nil {
-		fmt.Println("查询失败:", err)
-	}
-	indent, err := json.MarshalIndent(comments, "", "  ")
-	if err != nil {
-		fmt.Println("序列化失败:", err)
-	}
-	fmt.Println("查询结果: ", string(indent))
+	//gorm.CreatePostsHookUser(db)
+
+	// 测试 2：删除评论，验证文章评论状态更新
+	// 先创建一篇文章和一条评论
+	gorm.DeleteCommentHookPost(db)
 
 }

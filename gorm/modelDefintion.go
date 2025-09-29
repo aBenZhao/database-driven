@@ -13,19 +13,21 @@ import (
 //编写Go代码，使用Gorm创建这些模型对应的数据库表。
 
 type User struct {
-	ID    uint   `gorm:"type:bigint;primaryKey;autoIncrement" json:"id"`
-	Name  string `gorm:"type:varchar(50);not null;unique" json:"name"`
-	Email string `gorm:"type:varchar(100);not null;uniqueIndex" json:"email"`
-	Posts []Post `gorm:"foreignKey:UserID" json:"posts"`
+	ID            uint   `gorm:"type:bigint;primaryKey;autoIncrement" json:"id"`
+	Name          string `gorm:"type:varchar(50);not null;unique" json:"name"`
+	Email         string `gorm:"type:varchar(100);not null;uniqueIndex" json:"email"`
+	Posts         []Post `gorm:"foreignKey:UserID" json:"posts"`
+	PostsQuantity int    `gorm:"type:int;" json:"posts_quantity"`
 }
 
 type Post struct {
-	ID       uint      `gorm:"type:bigint;primaryKey;autoIncrement" json:"id"`
-	Title    string    `gorm:"type:varchar(100);not null" json:"title"`
-	Content  string    `gorm:"type:text;not null" json:"content"`
-	UserID   uint      `gorm:"type:bigint;not null" json:"user_id"`
-	User     User      `gorm:"foreignKey:UserID" json:"user"`
-	Comments []Comment `gorm:"foreignKey:PostID" json:"comments"`
+	ID            uint      `gorm:"type:bigint;primaryKey;autoIncrement" json:"id"`
+	Title         string    `gorm:"type:varchar(100);not null" json:"title"`
+	Content       string    `gorm:"type:text;not null" json:"content"`
+	UserID        uint      `gorm:"type:bigint;not null" json:"user_id"`
+	User          User      `gorm:"foreignKey:UserID" json:"user"`
+	Comments      []Comment `gorm:"foreignKey:PostID" json:"comments"`
+	CommentStatus string    `gorm:"type:varchar(20);default:'无评论'" json:"comment_status"` // 评论状态
 }
 type Comment struct {
 	ID          uint   `gorm:"type:bigint;primaryKey;autoIncrement" json:"id"`
